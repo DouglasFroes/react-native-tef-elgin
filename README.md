@@ -1,6 +1,6 @@
 # react-native-tef-elgin
 
-tef com  a biblioteca elgin, comunicacao native
+tef com  a biblioteca elgin, comunicação native
 
 ## Installation
 
