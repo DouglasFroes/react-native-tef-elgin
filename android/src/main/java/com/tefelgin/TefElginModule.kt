@@ -112,4 +112,41 @@ class TefElginModule(reactContext: ReactApplicationContext) :
       .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
       .emit("ideploy.tef.erro", params)
   }
+
+  private val mHandler = object : Handler(Looper.getMainLooper()) {
+    override fun handleMessage(msg: Message) {
+      var value: String? = null
+      val params: WritableMap = Arguments.createMap()
+      params.putInt("what", msg.what)
+
+      try {
+        when (msg.what) {
+          TefWhat.PROGRESS.value -> {
+              value = ElginTef.ObterMensagemProgresso()
+          }
+          TefWhat.COLLECT.value -> {
+              value = ElginTef.ObterOpcaoColeta()
+          }
+          TefWhat.TRANSACTION.value -> {
+              value = ElginTef.ObterMensagemProgresso()
+          }
+            TefWhat.INFO.value -> {
+              value = ElginTef.ObterDadosTransacao()
+          }
+          TefWhat.FINISH.value -> {
+              value = ElginTef.ObterMensagemProgresso()
+          }
+          TefWhat.INFOPIX.value -> {
+              value = msg.obj.toString()
+          }
+        }
+
+        params.putString("message", value ?: "${msg.obj}")
+        sendEvent(params)
+      } catch (e: Exception) {
+        params.putString("message", e.message)
+        sendEventErro(params)
+      }
+    }
+  }
 }
