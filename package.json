@@ -1,6 +1,6 @@
 {
   "name": "react-native-tef-elgin",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "tef com  a biblioteca elgin, comunicação native",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
